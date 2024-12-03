@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: uptimekuma
+  namespace: uptimekuma
+  labels:
+    app: uptimekuma
+spec:
+  ports:
+    - port: 3001
+  selector:
+    app: uptimekuma
+  clusterIP: None
