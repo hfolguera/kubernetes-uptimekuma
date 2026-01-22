@@ -17,8 +17,25 @@ spec:
         app: uptimekuma
     spec:
       containers:
-      - image: louislam/uptime-kuma:latest
+      - image: louislam/uptime-kuma:2
         name: uptimekuma
+        env:
+          - name: UPTIME_KUMA_DB_TYPE
+            value: "mariadb"
+          - name: UPTIME_KUMA_DB_HOSTNAME
+            value: "mariadb.mariadb.svc.calfolguera.com"
+          - name: UPTIME_KUMA_DB_NAME
+            value: "uptimekuma"
+          - name: UPTIME_KUMA_DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: uptimekuma-mariadb-pass
+                key: username
+          - name: UPTIME_KUMA_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: uptimekuma-mariadb-pass
+                key: password
         ports:
         - containerPort: 3001
           name: uptimekuma
